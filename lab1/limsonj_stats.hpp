@@ -32,7 +32,7 @@ namespace myStats {
         float max;
         float mean;
         float std_dev;
-    }
+    };
 }
 
 #endif
