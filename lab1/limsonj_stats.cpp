@@ -12,31 +12,41 @@
 
 using namespace std;
 
+myStats::statTools::statTools(int, int, int) {
+    this->min;
+    this->max;
+    this->mean;
+    this->std_dev;
+}
+
 void myStats::statTools::set_max(std::vector<float> * input_data) {
     // initialize variables
-    float max_val = 0.0;
+    float max_val = input_data->at(0);
 
-    for(int x : *input_data) {
+    for(float x : *input_data) {
         // if current value is greater than current max, update max
-        printf("Start: %d", x);
-        if (max_val < input_data->at(x)) {
-            max_val = input_data->at(x);
+        if (max_val < x) {
+            max_val = x;
         }
     }
+    // printf("Max Val: %f\n", max_val);
+
     // set private variable
     this->max = max_val;
 }
 
 void myStats::statTools::set_min(std::vector<float> * input_data) {
     // initialize variables
-    float min_val = 0.0;
+    float min_val = input_data->at(0);;
 
     for(int x : *input_data) {
         // if current value is less than current min, update min
-        if (min_val > input_data->at(x)) {
-            min_val = input_data->at(x);
+        if (min_val > x) {
+            min_val = x;
         }
     }
+    //printf("Min Val: %f\n", min_val);
+
     // set private variable
     this->min = min_val;
 }
@@ -48,11 +58,13 @@ void myStats::statTools::set_mean(std::vector<float> * input_data) {
 
     for (int x : *input_data) {
         // sum all of elements in vector
-        sum += input_data->at(x);
+        sum += x;
     }
 
     // divide sum by total number of elements
     mean_val = sum / input_data->size();
+
+    //printf("Mean: %f\n", mean_val);
 
     // set private variable
     this->mean = mean_val;
@@ -66,11 +78,13 @@ void myStats::statTools::set_std_dev(std::vector<float> * input_data) {
 
     for (int x : *input_data) {
         // square the difference of the element minus the mean
-        std_dev_val += pow((input_data->at(x) - mean), 2);
+        std_dev_val += pow((x - mean), 2);
     }
 
     // take the square root of the squared difference by number of elements
     std_dev_val = sqrt(std_dev_val / input_data->size());
+
+    // printf("Std dev: %f\n", std_dev_val);
 
     // set private variable
     this->std_dev = std_dev_val;

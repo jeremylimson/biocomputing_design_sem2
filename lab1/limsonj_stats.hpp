@@ -14,7 +14,7 @@ namespace myStats {
     class statTools {
         // acccessibility and perimssion
         public:
-        statTools();	// namespace::class
+        statTools(int, int, int);	// namespace::class
 
         void set_max(std::vector<float> * input_data);
         void set_min(std::vector<float> * input_data);
