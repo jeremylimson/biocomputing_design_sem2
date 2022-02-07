@@ -109,3 +109,54 @@ float myStats::statTools::get_std_dev() {
 /*
 * calculate bins externally(bins vector) --> separate function
 */
+
+void myStats::statTools::follow_me_on_histogram(std::vector<float> * input_data) {
+    // declare and initialize vector to hold upper and lower limits of bins
+    std::vector<float> bin_edges;
+    std::vector<float> bin_count;
+
+    // calculate mean as center of distribution
+    this->set_mean(input_data);
+
+    // calculate mean to use for bin width and edges
+    this->set_std_dev(input_data);
+    float std_dev_val = this->get_std_dev();
+
+    // bins begin and end at +/- 3*(sample standard deviation)
+    float bin_width = 0.4 * (std_dev_val);
+    float lower_edge = -3.0 * (std_dev_val);
+    float upper_edge = 3.0 * (std_dev_val);
+
+    int i = 0;
+
+    float edge_tracker = lower_edge;
+
+    // populate bin edges
+    while (edge_tracker < upper_edge) {
+        // populate vector holding bins
+        bin_edges.push_back(edge_tracker);
+
+        // similar to calloc --> allocate memory in vector and make 0
+        bin_count.push_back(0);
+        edge_tracker += bin_width;  // this vector will store the actual frequency
+    }
+
+    bin_edges.push_back(upper_edge);
+
+    for (int i = 0; i < input_data->size(); i++) {
+        for (int k = 0; k < bin_count.size(); k++) {
+            if (input_data->at(i) >= bin_edges.at(k) && input_data->at(i) < bin_edges.at(k + 1)) {
+                // increase frequency count
+                bin_count.at(k)++;
+            }
+        }
+    }
+
+    // log histogram to console
+    for (int i = 0; i < bin_edges.size(); i++) {
+        printf("\n%f\n", bin_edges.at(i));    // print bin labels
+        for (int k = 0; k < bin_count.at(i); k++) {
+            printf("*");    // * represents count
+        }
+    }
+}

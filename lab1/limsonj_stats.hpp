@@ -14,14 +14,17 @@ namespace myStats {
     class statTools {
         // acccessibility and perimssion
         public:
-        statTools(int, int, int);	// namespace::class
+        statTools(int, int, int);	// namespace::class (why do we need this?)
 
+        // setters
         void set_max(std::vector<float> * input_data);
         void set_min(std::vector<float> * input_data);
         void set_mean(std::vector<float> * input_data);
         void set_std_dev(std::vector<float> * input_data);
-        float follow_me_on_histogram(std::vector<float> * input_data);
+        float bin_width(std::vector<float> * input_data);
+        void follow_me_on_histogram(std::vector<float> * input_data);
 
+        // getters
         float get_max();
         float get_min();
         float get_mean();
