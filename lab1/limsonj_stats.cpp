@@ -13,10 +13,10 @@
 using namespace std;
 
 myStats::statTools::statTools(int, int, int) {
-    this->min;
-    this->max;
-    this->mean;
-    this->std_dev;
+    this->min = 0;
+    this->max = 0;
+    this->mean = 0;
+    this->std_dev = 0;
 }
 
 void myStats::statTools::set_max(std::vector<float> * input_data) {
@@ -107,16 +107,13 @@ float myStats::statTools::get_std_dev() {
 }
 
 /*
-* calculate bins externally(bins vector) --> separate function
+* calculate bins externally(bins vector) --> separate function?
 */
 
 void myStats::statTools::follow_me_on_histogram(std::vector<float> * input_data) {
     // declare and initialize vector to hold upper and lower limits of bins
     std::vector<float> bin_edges;
     std::vector<float> bin_count;
-
-    // calculate mean as center of distribution
-    this->set_mean(input_data);
 
     // calculate mean to use for bin width and edges
     this->set_std_dev(input_data);
@@ -126,8 +123,6 @@ void myStats::statTools::follow_me_on_histogram(std::vector<float> * input_data)
     float bin_width = 0.4 * (std_dev_val);
     float lower_edge = -3.0 * (std_dev_val);
     float upper_edge = 3.0 * (std_dev_val);
-
-    int i = 0;
 
     float edge_tracker = lower_edge;
 
@@ -141,11 +136,12 @@ void myStats::statTools::follow_me_on_histogram(std::vector<float> * input_data)
         edge_tracker += bin_width;  // this vector will store the actual frequency
     }
 
-    bin_edges.push_back(upper_edge);
+    bin_edges.push_back(upper_edge);  // should be accounted for by while loop
 
+    // logic from BIEN 3200 comp apps histogram
     for (int i = 0; i < input_data->size(); i++) {
         for (int k = 0; k < bin_count.size(); k++) {
-            if (input_data->at(i) >= bin_edges.at(k) && input_data->at(i) < bin_edges.at(k + 1)) {
+            if (input_data->at(i) >= bin_edges.at(k) && input_data->at(i) < bin_edges.at(k + 1)) {  // check if this works
                 // increase frequency count
                 bin_count.at(k)++;
             }
@@ -156,7 +152,7 @@ void myStats::statTools::follow_me_on_histogram(std::vector<float> * input_data)
     for (int i = 0; i < bin_edges.size(); i++) {
         printf("\n%f\n", bin_edges.at(i));    // print bin labels
         for (int k = 0; k < bin_count.at(i); k++) {
-            printf("*");    // * represents count
+            printf("=");    // = represents count for horizontal
         }
     }
 }

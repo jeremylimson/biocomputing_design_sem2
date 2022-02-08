@@ -5,21 +5,26 @@
 */
 
 #define _CRT_SECURE_NO_WARNINGS 
-#include "limsonj_corr.hpp"
-#include "limsonj_stats.hpp"
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <vector>
+#include "limsonj_stats.hpp"
+#include "limsonj_corr.hpp"
 
-corrSpace::corrTools::corrTools(int, int, int) {
-    this->coeff_corr;   // constructor
+using namespace myStats;
+
+myStats::corrTools::corrTools(int a, int b, int c) {
+    // initialize private variables
+    this->coeff_corr = 0;
 }
 
-void set_corr_coeff(std::vector<float> * input_data1, std::vector<float> * input_data2) {
+void myStats::corrTools::set_corr_coeff(std::vector<float> * input_data1, std::vector<float> * input_data2) {
+    // initialize variables
     int x, y, z;
     float correlation = 0.0;
 
+    // FIXME
     myStats::statTools statTest(x, y, z); // create instance of stat class
 
     statTest.set_mean(input_data1);
@@ -29,21 +34,46 @@ void set_corr_coeff(std::vector<float> * input_data1, std::vector<float> * input
     float mean2 = statTest.get_mean();
 
     int total_count = input_data1->size() + input_data2->size();
-    printf("N: \n", total_count);
+    printf("N: %d\n", total_count);
 
-    float numerator1 = 0;
-    //float numerator2 = 
+    float numerator1 = 0.0;
 
     for(int x : *input_data1) {
         for (int y : *input_data2) {
-            numerator1 += x * y;
+            numerator1 += x * y;    // calculate the summation of x * y minus N * the mean of x * the mean of y
         }
     }
 
-    printf("%f\n", numerator1);
+    float numerator2 = total_count * mean1 * mean2;
 
+    //printf("%f\n", numerator1);
+    
+    float numerator = numerator1 - numerator2;
+
+    float denominator1 = 0.0;
+
+    for (int x : *input_data1) {
+        denominator1 += pow(x, 2);  // summation of x^2
+    }
+
+    float denominator2 = (total_count) * (pow(mean1, 2));   // N * (the mean of x) ^2 
+
+    float denominator3 = 0.0;
+
+    for (int x : *input_data2) {
+        denominator3 += pow(x, 2);  // summation of y^2
+    }
+
+    float denominator4 = (total_count) * (pow(mean2, 2));   // N * (the mean of y) ^2
+
+    float denominator = (denominator1 - denominator2) * (denominator3 - denominator4);
+    denominator = pow(denominator, 0.5);    // sqrt of the denominator
+
+    correlation = numerator / denominator;
+
+    this->coeff_corr = correlation;
 }
 
-float corrSpace::corrTools::get_corr_coeff() {
+float myStats::corrTools::get_corr_coeff() {
     return coeff_corr;
 }

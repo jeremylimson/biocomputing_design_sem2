@@ -14,7 +14,7 @@ namespace myStats {
     class statTools {
         // acccessibility and perimssion
         public:
-        statTools(int, int, int);	// namespace::class (why do we need this?)
+        statTools(int x, int y, int z);	// namespace::class (why do we need this?)
 
         // setters
         void set_max(std::vector<float> * input_data);

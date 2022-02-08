@@ -4,16 +4,16 @@
 * description : functions for correlation
 */
 
-#ifndef super_trooper_cooper
+#ifndef super_trooper_cooper2
 
-#define super_trooper_cooper
+#define super_trooper_cooper2
 
 #include <vector>
 
-namespace corrSpace {
+namespace myStats {
     class corrTools {
         public:
-        corrTools(int, int, int);   // constructor
+        corrTools(int a, int b, int c);   // constructor
 
         // setter
         void set_corr_coeff(std::vector<float> * input_data1, std::vector<float> * input_data2);    // calculate correlation
