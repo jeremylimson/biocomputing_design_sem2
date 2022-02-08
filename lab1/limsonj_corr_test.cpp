@@ -5,6 +5,7 @@
 */
 
 #include "limsonj_corr.cpp" // i know youre not supposed to have this but this isnt the problem i checked
+#include "limsonj_stats.cpp"
 
 int main(int argc, char * argv[]) {
     
