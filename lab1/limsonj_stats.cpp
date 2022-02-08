@@ -12,11 +12,17 @@
 
 using namespace std;
 
-myStats::statTools::statTools(int, int, int) {
+myStats::statTools::statTools(int x, int y, int z) {
     this->min = 0;
     this->max = 0;
     this->mean = 0;
     this->std_dev = 0;
+}
+
+void myStats::statTools::set_size(std::vector<float> * input_data) {
+    int size_val = input_data->size();
+    printf("Size: %d\n", size_val);
+    this->size = size_val;
 }
 
 void myStats::statTools::set_max(std::vector<float> * input_data) {
@@ -29,7 +35,8 @@ void myStats::statTools::set_max(std::vector<float> * input_data) {
             max_val = x;
         }
     }
-    // printf("Max Val: %f\n", max_val);
+
+    printf("Max Value: %f\n", max_val);
 
     // set private variable
     this->max = max_val;
@@ -39,13 +46,14 @@ void myStats::statTools::set_min(std::vector<float> * input_data) {
     // initialize variables
     float min_val = input_data->at(0);;
 
-    for(int x : *input_data) {
+    for(float x : *input_data) {
         // if current value is less than current min, update min
         if (min_val > x) {
             min_val = x;
         }
     }
-    //printf("Min Val: %f\n", min_val);
+
+    printf("Min Value: %f\n", min_val);
 
     // set private variable
     this->min = min_val;
@@ -56,7 +64,7 @@ void myStats::statTools::set_mean(std::vector<float> * input_data) {
     float mean_val = 0.0;
     float sum = 0.0;
 
-    for (int x : *input_data) {
+    for (float x : *input_data) {
         // sum all of elements in vector
         sum += x;
     }
@@ -64,7 +72,7 @@ void myStats::statTools::set_mean(std::vector<float> * input_data) {
     // divide sum by total number of elements
     mean_val = sum / input_data->size();
 
-    //printf("Mean: %f\n", mean_val);
+    printf("Mean: %f\n", mean_val);
 
     // set private variable
     this->mean = mean_val;
@@ -76,7 +84,7 @@ void myStats::statTools::set_std_dev(std::vector<float> * input_data) {
     this->set_mean(input_data);
     float mean = this->get_mean();
 
-    for (int x : *input_data) {
+    for (float x : *input_data) {
         // square the difference of the element minus the mean
         std_dev_val += pow((x - mean), 2);
     }
@@ -84,10 +92,14 @@ void myStats::statTools::set_std_dev(std::vector<float> * input_data) {
     // take the square root of the squared difference by number of elements
     std_dev_val = sqrt(std_dev_val / input_data->size());
 
-    // printf("Std dev: %f\n", std_dev_val);
+    printf("Standard Deviation: %f\n", std_dev_val);
 
     // set private variable
     this->std_dev = std_dev_val;
+}
+
+int myStats::statTools::get_size() {
+    return size;
 }
 
 float myStats::statTools::get_max() {

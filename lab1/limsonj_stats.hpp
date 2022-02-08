@@ -21,6 +21,7 @@ namespace myStats {
         void set_min(std::vector<float> * input_data);
         void set_mean(std::vector<float> * input_data);
         void set_std_dev(std::vector<float> * input_data);
+        void set_size(std::vector<float> * input_data);
         float bin_width(std::vector<float> * input_data);
         void follow_me_on_histogram(std::vector<float> * input_data);
 
@@ -28,9 +29,11 @@ namespace myStats {
         float get_max();
         float get_min();
         float get_mean();
+        int get_size();
         float get_std_dev();
 
         private:
+        int size;
         float min;
         float max;
         float mean;
