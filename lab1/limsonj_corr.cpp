@@ -42,14 +42,14 @@ void myStats::corrTools::set_corr_coeff(std::vector<float> * input_data1, std::v
     float numerator = numerator1 - numerator2;
     float denominator1 = 0.0;
 
-    for (int x : *input_data1) {
+    for (float x : *input_data1) {
         denominator1 += pow(x, 2);  // summation of x^2
     }
 
     float denominator2 = (total_count) * (pow(mean1, 2));   // N * (the mean of x) ^2 
     float denominator3 = 0.0;
 
-    for (int x : *input_data2) {
+    for (float x : *input_data2) {
         denominator3 += pow(x, 2);  // summation of y^2
     }
     

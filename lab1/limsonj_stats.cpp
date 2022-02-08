@@ -72,8 +72,6 @@ void myStats::statTools::set_mean(std::vector<float> * input_data) {
     // divide sum by total number of elements
     mean_val = sum / input_data->size();
 
-    printf("Mean: %f\n", mean_val);
-
     // set private variable
     this->mean = mean_val;
 }
