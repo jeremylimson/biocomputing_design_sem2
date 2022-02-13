@@ -5,10 +5,10 @@
 */
 
 #define _CRT_SECURE_NO_WARNINGS 
-#include "limsonj_stats.hpp"
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include "limsonj_stats.hpp"
 
 using namespace std;
 
@@ -136,6 +136,8 @@ void myStats::statTools::follow_me_on_histogram(std::vector<float> * input_data)
 
     float edge_tracker = lower_edge;
 
+    
+
     // populate bin edges
     while (edge_tracker < upper_edge) {
         // populate vector holding bins
@@ -157,11 +159,12 @@ void myStats::statTools::follow_me_on_histogram(std::vector<float> * input_data)
             }
         }
     }
+    printf("\nOne '=' is 10 count\n");
 
     // log histogram to console
     for (int i = 0; i < bin_edges.size(); i++) {
         printf("\n%f\n", bin_edges.at(i));    // print bin labels
-        for (int k = 0; k < bin_count.at(i); k++) {
+        for (int k = 0; k < bin_count.at(i); k += 10) {
             printf("=");    // = represents count for horizontal
         }
     }

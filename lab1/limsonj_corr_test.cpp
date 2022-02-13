@@ -4,8 +4,10 @@
 * description : test file for testing correlation class functions
 */
 
-#include "limsonj_corr.cpp" // i know youre not supposed to have this but this isnt the problem i checked
-#include "limsonj_stats.cpp"
+#include <stdio.h>
+#include <stdlib.h>
+#include "limsonj_corr.hpp"
+#include "limsonj_stats.hpp"
 
 int main(int argc, char * argv[]) {
 

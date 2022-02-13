@@ -4,8 +4,9 @@
 * description : test file for testing statistical functions
 */
 
-// this is wrong but it won't work without it
-#include "limsonj_stats.cpp"
+#include <stdio.h>
+#include <stdlib.h>
+#include "limsonj_stats.hpp"
 
 using namespace std;
 
@@ -33,18 +34,6 @@ int main(int argc, char * argv[]) {
         state = fscanf(data_file, "%f", &num);
     }
 
-    // ifstream in_file;
-    // in_file.open(argv[1]);
-
-    // if (in_file.fail()) {
-    //     cout << "File failed to load. Please try again.";
-    // } else {
-    //     float input = 0.0;
-    //     while (cin >> input) {
-    //         cout << input << endl;
-    //     }
-    // }
-    
     myStats::statTools statTest(x, y, z);
 
     //std::vector<float> test_vector = {1.1, 2.2, 4.4, 5.5, 6.6, 7.7, 8.8, 10.1};
