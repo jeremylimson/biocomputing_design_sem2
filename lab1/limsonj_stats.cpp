@@ -136,10 +136,8 @@ void myStats::statTools::follow_me_on_histogram(std::vector<float> * input_data)
 
     float edge_tracker = lower_edge;
 
-    
-
     // populate bin edges
-    while (edge_tracker < upper_edge) {
+    while (edge_tracker <= upper_edge) {
         // populate vector holding bins
         bin_edges.push_back(edge_tracker);
 
@@ -152,19 +150,19 @@ void myStats::statTools::follow_me_on_histogram(std::vector<float> * input_data)
 
     // logic from BIEN 3200 comp apps histogram
     for (int i = 0; i < input_data->size(); i++) {
-        for (int k = 0; k < bin_count.size(); k++) {
+        for (int k = 0; k < bin_count.size() - 1; k++) {
             if (input_data->at(i) >= bin_edges.at(k) && input_data->at(i) < bin_edges.at(k + 1)) {  // check if this works
                 // increase frequency count
                 bin_count.at(k)++;
             }
         }
     }
-    printf("\nOne '=' is 10 count\n");
+    printf("\nOne '=' is 15 count\n");
 
     // log histogram to console
     for (int i = 0; i < bin_edges.size(); i++) {
         printf("\n%f\n", bin_edges.at(i));    // print bin labels
-        for (int k = 0; k < bin_count.at(i); k += 10) {
+        for (int k = 0; k < bin_count.at(i); k += 15) {
             printf("=");    // = represents count for horizontal
         }
     }

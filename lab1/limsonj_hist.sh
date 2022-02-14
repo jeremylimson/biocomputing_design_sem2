@@ -1,6 +1,6 @@
 #!/bin/bash
 # jeremy limson
-# 2/28/2022
+# 2/15/2022
 # histogram analysis
 
 # prompt user for concentration to analyze
@@ -18,7 +18,6 @@ then
     cat ERP05/* > EEG_DATA/catted_input.dat  
 fi
 
-# FIXME
 ~/bin/./limsonj_stats_exec EEG_DATA/catted_input.dat > EEG_DATA/hist_results_$lvl_analyzed.dat
 
 # check if file exist

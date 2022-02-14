@@ -59,7 +59,7 @@ void myStats::corrTools::set_corr_coeff(std::vector<float> * input_data1, std::v
     denominator = pow(denominator, 0.5);    // sqrt of the denominator
 
     correlation = numerator / denominator;
-    printf("%f\n", correlation);
+    printf("%f,\n", correlation);
     
     this->coeff_corr = correlation;
 }
