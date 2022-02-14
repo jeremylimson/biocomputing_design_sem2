@@ -120,10 +120,10 @@ float myStats::statTools::get_std_dev() {
 * calculate bins externally(bins vector) --> separate function?
 */
 
-void myStats::statTools::follow_me_on_histogram(std::vector<float> * input_data) {
+void myStats::statTools::follow_me_on_histogram(std::vector<float>* input_data) {
     // declare and initialize vector to hold upper and lower limits of bins
     std::vector<float> bin_edges;
-    std::vector<float> bin_count;
+    std::vector<int> bin_count;
 
     // calculate mean to use for bin width and edges
     this->set_std_dev(input_data);
@@ -137,7 +137,7 @@ void myStats::statTools::follow_me_on_histogram(std::vector<float> * input_data)
     float edge_tracker = lower_edge;
 
     // populate bin edges
-    while (edge_tracker <= upper_edge) {
+    while (edge_tracker < upper_edge) {
         // populate vector holding bins
         bin_edges.push_back(edge_tracker);
 
@@ -148,7 +148,7 @@ void myStats::statTools::follow_me_on_histogram(std::vector<float> * input_data)
 
     bin_edges.push_back(upper_edge);  // should be accounted for by while loop
 
-    // logic from BIEN 3200 comp apps histogram
+    // logic from BIEN 3200 comp apps histogram lab 1
     for (int i = 0; i < input_data->size(); i++) {
         for (int k = 0; k < bin_count.size() - 1; k++) {
             if (input_data->at(i) >= bin_edges.at(k) && input_data->at(i) < bin_edges.at(k + 1)) {  // check if this works
@@ -157,6 +157,7 @@ void myStats::statTools::follow_me_on_histogram(std::vector<float> * input_data)
             }
         }
     }
+    // this executable won't update when I recompile --> seems like the issue is a bit out of my paygrade 
     printf("\nOne '=' is 15 count\n");
 
     // log histogram to console

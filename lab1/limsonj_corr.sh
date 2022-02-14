@@ -13,27 +13,28 @@ read lvl_analyzed
 # done
 
 # iterate through all files in ERPXX directory
-if [ "$lvl_analyzed"=="ERP00" ];
+if [ "$lvl_analyzed" = "ERP00" ];
 then
     echo Reading $lvl_analyzed
     # iterate through all files in ERPXX directory
     for i in {1..59} ; do
         let next_file=$i+1
-        # send to .csv
         # add label describing correlation e.g. ERP001 vs. ERP002, coefficient
-        ./
-        # FIXME this works but running it multiple times will only append to existing file
-        # what is the format of a csv and how do we add commas
-        ./limsonj_corr_exec ./ERP00/ERP00$i.txt ./ERP00/ERP00$next_file.txt >> ./EEG_DATA/conc_corr_$lvl_analyzed.csv
+        echo -n "$i vs. $next_file, " >> ./EEG_DATA/conc_corr_$lvl_analyzed.csv
+        # this works but running it multiple times will only append to existing file
+        # send to .csv
+        ../../bin/limsonj_corr_exec ./ERP00/ERP00$i.txt ./ERP00/ERP00$next_file.txt >> ./EEG_DATA/conc_corr_$lvl_analyzed.csv
     done
-elif [ "$lvl_analyzed"=="ERP05" ];
+elif [ "$lvl_analyzed" = "ERP05" ];
 then
     echo Reading $lvl_analyzed
     for i in {1..59} ; do
         let next_file=$i+1
+        # add label describing correlation e.g. ERP001 vs. ERP002, coefficient
+        echo -n "$i vs. $next_file, " >> ./EEG_DATA/conc_corr_$lvl_analyzed.csv
         # send to .csv
-        # FIXME this works but running it multiple times will only append to existing file
-        ./limsonj_corr_exec ./ERP05/ERP05.$i.txt ./ERP05/ERP05.$next_file.txt >> ./EEG_DATA/conc_corr_$lvl_analyzed.csv
+        # this works but running it multiple times will only append to existing file
+        ../../bin/limsonj_corr_exec ./ERP05/ERP05.$i.txt ./ERP05/ERP05.$next_file.txt >> ./EEG_DATA/conc_corr_$lvl_analyzed.csv
     done
 fi
 
