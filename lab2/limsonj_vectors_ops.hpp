@@ -18,8 +18,6 @@
 namespace vector_ops {
     class vector_tools {
         public:
-        // constructor
-        vector_tools(int x, int y, int z);
 
         // function that sums all elements of an array        
         float sum_array(std::vector<float> * input_data);
@@ -28,7 +26,7 @@ namespace vector_ops {
         void element_wise_sub(std::vector<float> * input_data1, std::vector<float> * input_data2, std::vector<float> * output_data);
 
         // function that divides all values of an array by a constant
-        void div_array(std::vector<float> * input_data);
+        void div_array(std::vector<float> * input_data, int divisor, std::vector<float> * output_data);
     };
 }
 

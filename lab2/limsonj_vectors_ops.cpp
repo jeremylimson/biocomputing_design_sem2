@@ -6,7 +6,7 @@
 
 #include "limsonj_vectors_ops.hpp"
 
-float sum_array(std::vector<float> * input_data) {
+float vector_ops::vector_tools::sum_array(std::vector<float> * input_data) {
     // initialize variables
     float sum = 0.0;
 
@@ -22,7 +22,7 @@ float sum_array(std::vector<float> * input_data) {
     return sum;
 }
 
-void element_wise_sub(std::vector<float> * input_data1, std::vector<float> * input_data2, std::vector<float> * output_data) {
+void vector_ops::vector_tools::element_wise_sub(std::vector<float> * input_data1, std::vector<float> * input_data2, std::vector<float> * output_data) {
     // initialize variables
     int difference = 0;
 
@@ -36,11 +36,11 @@ void element_wise_sub(std::vector<float> * input_data1, std::vector<float> * inp
         }
     } else {
         // tell the user they messed up
-        std::cout << "Sorry friend, these vectors are not the same size\n"
+        std::cout << "Sorry friend, these vectors are not the same size\n";
     }
 }
 
-void div_array(std::vector<float> * input_data, int divisor, std::vector<float> * output_data) {
+void vector_ops::vector_tools::div_array(std::vector<float> * input_data, int divisor, std::vector<float> * output_data) {
     // initialize variables
     float quotient = 0.0;
 
@@ -51,4 +51,8 @@ void div_array(std::vector<float> * input_data, int divisor, std::vector<float> 
         quotient = input_data->at(i) / (float) divisor;
         output_data->push_back(quotient);
     }
+}
+
+int main(int argc, char * argv[]) {
+    return 0;
 }
