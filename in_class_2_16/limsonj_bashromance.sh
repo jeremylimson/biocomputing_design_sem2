@@ -10,6 +10,7 @@ lyric6="Roma Roma-ma"
 lyric7="Gaga, ooh la-la"
 lyric8="Want your bad romance"
 
+# print out intro of bad romance using if and for loop
 for (( i=1;i<=12;i++ ));
 do
     if [ $i -eq 1 ] || [ $i -eq 3 ];
@@ -33,17 +34,12 @@ do
     fi
 done
 
-file_name=./good_movies.txt
+printf "\n"
 
-echo $file_name
-
-good_movies=cat $file_name
-
-# print favorite movie from the good_movies.txt list
-for movie in $good_movies;
+while IFS= read movie
 do
     if [ "$movie" = "Nick is a bad coder" ];
     then
         echo ${movie}
     fi
-done
+done < good_movies.txt
