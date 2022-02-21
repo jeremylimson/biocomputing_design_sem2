@@ -1,0 +1,7 @@
+total 4
+-rw-rw-r-- 1 limsonj limsonj   0 Feb  7 10:49 agent_smith
+-rw-rw-r-- 1 limsonj limsonj 240 Feb  7 10:48 jlimson_basicio.sh
+lrwxrwxrwx 1 limsonj limsonj  13 Feb  7 10:49 me -> ./agent_smtih
+lrwxrwxrwx 1 limsonj limsonj  13 Feb  7 10:49 me_me -> ./agent_smtih
+lrwxrwxrwx 1 limsonj limsonj  13 Feb  7 10:49 me_too -> ./agent_smtih
+-rw-rw-r-- 1 limsonj limsonj   0 Feb  7 10:48 smith_list.txt
