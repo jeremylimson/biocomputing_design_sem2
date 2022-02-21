@@ -61,7 +61,3 @@ void vector_ops::vector_tools::div_array(std::vector<float> * input_data, int di
         }
     }
 }
-
-int main(int argc, char * argv[]) {
-    return 0;
-}

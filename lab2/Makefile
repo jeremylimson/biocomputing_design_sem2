@@ -7,10 +7,13 @@ CC=g++
 vector_op.o: limsonj_vectors_ops.cpp limsonj_vectors_ops.hpp
 	$(CC) -c $^
 
+pre_processing.o: limsonj_vector_ops_pre_processing.cpp limsonj_vector_ops_pre_processing.hpp
+	$(CC) -c $^
+
 stats_op.o: limsonj_stats.cpp limsonj_stats.hpp
 	$(CC) -c $^
 
-vect_op_exe: limsonj_vectors_ops.o #limsonj_vectors_ops_test.o
+vect_op_exe: limsonj_vectors_ops.o limsonj_vector_ops_pre_processing.o
 	$(CC) -o $@ $^
 
 all: stats_op.o vect_op_exe
