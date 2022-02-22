@@ -30,12 +30,33 @@ int main(int argc, char * argv[]) {
     char* file_name = argv[5];
 
     // read red sporulating cells file and background data
-	red_data = fopen(argv[1], "r");
-	red_back = fopen(argv[2], "r");
+	if (red_data = fopen(argv[1], "r")) {
+        std::cout << argv[1] <<" file exists\n";
+    } else {
+        std::cout << "Swing and a miss... " << argv[1] << " does not exist. Try again\n\r";
+        return -1;
+    }
+
+	if (red_back = fopen(argv[2], "r")) {
+        std::cout << argv[2] <<" file exists\n";
+    } else {
+        std::cout << "Swing and a miss... " << argv[2] << " does not exist. Try again\n\r";
+        return -1;
+    }
     
     // read green sporulating cells file and background data
-    green_data = fopen(argv[3], "r");
-	green_back = fopen(argv[4], "r");
+    if (green_data = fopen(argv[3], "r")) {
+        std::cout << argv[3] <<" file exists\n";
+    } else {
+        std::cout << "Swing and a miss... " << argv[3] << " does not exist. Try again\n\r";
+        return -1;
+    }
+	if (green_back = fopen(argv[4], "r")) {
+        std::cout << argv[4] <<" file exists\n";
+    } else {
+        std::cout << "Swing and a miss... " << argv[4] << " does not exist. Try again\n\r";
+        return -1;
+    }
 
     // fifth argument is the output file name
     out_file = fopen(file_name, "w");
@@ -79,8 +100,8 @@ int main(int argc, char * argv[]) {
     // normalize data by dividing each data point by the mean
     get_vectored.div_array(&red_sub_array, red_mean, &normalized_red);
     get_vectored.div_array(&green_sub_array, green_mean, &normalized_green);
-    
-    // calculate log ratio
+
+    // calculate log intensity ratio
     for (int i = 0; i < red_sub_array.size(); i++) {
         float lr = log10(normalized_red.at(i) / normalized_green.at(i));
         fprintf(out_file, "%f\n", lr);
