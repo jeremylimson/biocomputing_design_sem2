@@ -22,6 +22,4 @@ void open_file(FILE* handle, std::vector<int> * input_data);
 
 bool geneCheck(std::vector<int>* input_data, int genes);
 
-//float log_intensity_ratio(std::vector<int>);
-
 #endif
