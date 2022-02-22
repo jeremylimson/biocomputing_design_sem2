@@ -75,14 +75,14 @@ int main(int argc, char * argv[]) {
 
     std::vector<float> normalized_red;
     std::vector<float> normalized_green;
-
+    
     // normalize data by dividing each data point by the mean
     get_vectored.div_array(&red_sub_array, red_mean, &normalized_red);
     get_vectored.div_array(&green_sub_array, green_mean, &normalized_green);
-
+    
     // calculate log ratio
     for (int i = 0; i < red_sub_array.size(); i++) {
-        float lr = normalized_red.at(i) / normalized_green.at(i);
+        float lr = log10(normalized_red.at(i) / normalized_green.at(i));
         fprintf(out_file, "%f\n", lr);
     }
 
