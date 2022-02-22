@@ -6,9 +6,16 @@
 
 #include "limsonj_vectors_ops.hpp"
 
-float vector_ops::vector_tools::sum_array(std::vector<float> * input_data) {
+vector_ops::vector_tools::vector_tools(int x, int y, int z) {
+    // initialize constructor
+    x = 0;
+    y = 0;
+    z = 0;
+}
+
+int vector_ops::vector_tools::sum_array(std::vector<int> * input_data) {
     // initialize variables
-    float sum = 0.0;
+    int sum = 0.0;
 
     // TODO: check if vectors are NULL
     if (input_data->empty() == true) {
@@ -16,16 +23,16 @@ float vector_ops::vector_tools::sum_array(std::vector<float> * input_data) {
         return 0;
     } else {
         // sum all numbers
-        for (float i : *input_data) {
+        for (int i : *input_data) {
             sum += i;   // add all elements
-            std::cout << i;
+            //std::cout << i;
         }
-        std::cout << sum;
+        //std::cout << sum;
         return sum;
     }
 }
 
-void vector_ops::vector_tools::element_wise_sub(std::vector<float> * input_data1, std::vector<float> * input_data2, std::vector<float> * output_data) {
+void vector_ops::vector_tools::element_wise_sub(std::vector<int> * input_data1, std::vector<int> * input_data2, std::vector<int> * output_data) {
     // initialize variables
     int difference = 0;
 
@@ -46,7 +53,7 @@ void vector_ops::vector_tools::element_wise_sub(std::vector<float> * input_data1
     }
 }
 
-void vector_ops::vector_tools::div_array(std::vector<float> * input_data, int divisor, std::vector<float> * output_data) {
+void vector_ops::vector_tools::div_array(std::vector<int> * input_data, float divisor, std::vector<float> * output_data) {
     // initialize variables
     float quotient = 0.0;
 

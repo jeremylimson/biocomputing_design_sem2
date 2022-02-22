@@ -15,8 +15,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "limsonj_vector_ops.cpp"
+#include "limsonj_vectors_ops.hpp"
+#include "limsonj_stats.hpp"
 
-void open_file(FILE* handle, std::vector * input_data);
+void open_file(FILE* handle, std::vector<int> * input_data);
+
+bool geneCheck(std::vector<int>* input_data, int genes);
+
+//float log_intensity_ratio(std::vector<int>);
 
 #endif
