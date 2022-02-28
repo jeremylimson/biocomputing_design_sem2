@@ -109,7 +109,7 @@ int main(int argc, char * argv[]) {
     std::vector<float> normalized_data;
     fclose(out_file);
     FILE* normal_data;
-    float line, distance1 = 0.0, distance2 = 0.0, distance3 = 0.0, criteria = 0.0,
+    float line, distance1 = 0.0, distance2 = 0.0, distance3 = 0.0, criteria = 1.0,
     old_mean1 = 0.0, old_mean2 = 0.0, old_mean3 = 0.0, new_mean1 = 0.0, new_mean2 = 0.0, new_mean3 = 0.0;
 
     // PART 3: read in data file and check if it exists
@@ -143,42 +143,54 @@ int main(int argc, char * argv[]) {
     cluster2.set_object_mean(0.0);
     cluster3.set_object_mean(0.5);
 
-    // for each log ratio data point calculate the distance of the point to each of the three cluster means
-    for (float i : normalized_data) {
-        distance1 = cluster1.distance(i);
-        distance2 = cluster2.distance(i);
-        distance3 = cluster3.distance(i);
-        
-        // compare returned distance to means and add point to closest cluster
-        if (distance1 < distance2 && distance1 < distance3) {
-            cluster1.cluster_set.push_back(i);
-        } else if (distance2 < distance1 && distance2 < distance3) {
-            cluster2.cluster_set.push_back(i);
-        } else if (distance3 < distance1 && distance3 < distance2) {
-            cluster3.cluster_set.push_back(i);
+    // (4) while this criteria is greater than 0.0001, repeat 1-4
+    while (criteria > 0.0001) {
+        // clear every iteration
+        cluster1.cluster_set.clear();
+        cluster2.cluster_set.clear();
+        cluster3.cluster_set.clear();
+
+        // (1) for each log ratio data point calculate the distance of the point to each of the three cluster means
+        for (float i : normalized_data) {
+            distance1 = cluster1.distance(i);
+            distance2 = cluster2.distance(i);
+            distance3 = cluster3.distance(i);
+            
+            // /(2) compare returned distance to means and add point to closest cluster
+            if (distance1 < distance2 && distance1 < distance3) {
+                cluster1.cluster_set.push_back(i);
+            } else if (distance2 < distance1 && distance2 < distance3) {
+                cluster2.cluster_set.push_back(i);
+            } else if (distance3 < distance1 && distance3 < distance2) {
+                cluster3.cluster_set.push_back(i);
+            }
         }
+
+        // (3) when all points have been reassigned, recalculate the cluster means
+        old_mean1 = cluster1.get_object_mean();
+        old_mean2 = cluster2.get_object_mean();
+        old_mean3 = cluster3.get_object_mean();
+
+        clusterStat.set_mean(&cluster1.cluster_set);
+        new_mean1 = clusterStat.get_mean();
+
+        clusterStat.set_mean(&cluster2.cluster_set);
+        new_mean2 = clusterStat.get_mean();
+
+        clusterStat.set_mean(&cluster3.cluster_set);
+        new_mean3 = clusterStat.get_mean();
+
+        cluster1.set_object_mean(new_mean1);
+        cluster2.set_object_mean(new_mean2);
+        cluster3.set_object_mean(new_mean3);
+
+        // (4) criteria = |c1_mean_old – c1_mean| + |c2_mean_old – c2_mean|+|c3_mean_old –c3_mean|
+        criteria = abs(old_mean1 - new_mean1) + abs(old_mean2 - new_mean2) + abs(old_mean3 - new_mean3);
     }
-
-    // when all points have been reassigned, recalculate the cluster means
-    old_mean1 = cluster1.get_object_mean();
-    old_mean2 = cluster2.get_object_mean();
-    old_mean3 = cluster3.get_object_mean();
-
-    clusterStat.set_mean(&cluster1.cluster_set);
-    new_mean1 = clusterStat.get_mean();
-
-    clusterStat.set_mean(&cluster2.cluster_set);
-    new_mean2 = clusterStat.get_mean();
-
-    clusterStat.set_mean(&cluster3.cluster_set);
-    new_mean3 = clusterStat.get_mean();
-
-    cluster1.set_object_mean(new_mean1);
-    cluster2.set_object_mean(new_mean2);
-    cluster3.set_object_mean(new_mean3);
-
-    // criteria = |c1_mean_old – c1_mean| + |c2_mean_old – c2_mean|+|c3_mean_old –c3_mean|
     
+    // output final cluster means to standard output
+
+    // write three output files, one for each of the final clusters: expressed_genes.txt, suppressed_genes.txt, stationary_genes.txt.  Each file should list the genes by name.
 
     // close files
     fclose(red_data);
