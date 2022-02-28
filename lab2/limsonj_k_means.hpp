@@ -15,13 +15,16 @@
 #include <math.h>
 #include <string>
 
+#include "limsonj_stats.hpp"
+
 namespace k_mean {
     class cluster {
         public:
         cluster();  // constructor
 
-        float distance(int data_point);
-
+        float distance(float data_point);
+        std::vector<float> cluster_set;
+        
         // setters
         void set_object_name(std::string name);
         void set_object_mean(float mean);
@@ -34,7 +37,6 @@ namespace k_mean {
         // class variables
         std::string object_name;
         float object_mean;
-        std::vector<float> cluster_set;
     };
 }
 

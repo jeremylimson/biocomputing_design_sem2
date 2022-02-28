@@ -16,7 +16,7 @@ stats_op.o: limsonj_stats.cpp limsonj_stats.hpp
 k_means.o: limsonj_k_means.cpp limsonj_k_means.hpp
 	$(CC) -c $^
 
-vect_op_exe: limsonj_vectors_ops.o limsonj_vector_ops_pre_processing.o limsonj_k_means.o
+vect_op_exe: limsonj_vectors_ops.o limsonj_vector_ops_pre_processing.o limsonj_k_means.o limsonj_stats.o
 	$(CC) -o $@ $^
 
 all: stats_op.o vect_op_exe

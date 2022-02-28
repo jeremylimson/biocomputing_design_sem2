@@ -13,8 +13,13 @@ k_mean::cluster::cluster() {
     this->cluster_set;
 }
 
-float k_mean::cluster::distance(int data_point) {
+float k_mean::cluster::distance(float data_point) {
+    // initialize variables
     float cluster_distance = 0.0;
+    float mean = this->object_mean;
+    
+    // calculate the one dimensional distance of the data point to the cluster mean
+    cluster_distance = abs(data_point - mean);
 
     return cluster_distance;
 }

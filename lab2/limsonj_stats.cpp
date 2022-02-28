@@ -6,7 +6,7 @@
 
 #include "limsonj_stats.hpp"
 
-myStats::statTools::statTools(int x, int y, int z) {
+myStats::statTools::statTools() {
     this->min = 0;
     this->max = 0;
     this->mean = 0;
