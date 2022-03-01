@@ -13,13 +13,16 @@ pre_processing.o: limsonj_vector_ops_pre_processing.cpp limsonj_vector_ops_pre_p
 stats_op.o: limsonj_stats.cpp limsonj_stats.hpp
 	$(CC) -c $^
 
-k_means.o: limsonj_k_means.cpp limsonj_k_means.hpp
-	$(CC) -c $^
-
-vect_op_exe: limsonj_vectors_ops.o limsonj_vector_ops_pre_processing.o limsonj_k_means.o limsonj_stats.o
+vect_op_exe: limsonj_vectors_ops.o limsonj_vector_ops_pre_processing.o
 	$(CC) -o $@ $^
 
-all: stats_op.o vect_op_exe
+cluster_op: limsonj_k_means.cpp limsonj_k_means.hpp limsonj_cluster.cpp
+	$(CC) -c $^
+
+cluster_op_exe: limsonj_k_means.o limsonj_stats.o limsonj_cluster.o
+	$(CC) -o $@ $^
+
+all: stats_op.o vect_op_exe cluster_op_exe
 	
 clean:
 	rm -f *.o
