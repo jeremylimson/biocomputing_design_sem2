@@ -30,7 +30,7 @@ int main(int argc, char * argv[]) {
 
     // PART 3: read in data file and check if it exists
     if (normal_data = fopen("log_ratio_input.dat", "r")) {
-        std::cout << " log_ratio_input.dat exists\n";
+        //std::cout << " log_ratio_input.dat exists\n";
     } else {
         std::cout << "Swing and a miss... " << "log_ratio_input.dat" << " does not exist. Try again\n\r";
         return -1;

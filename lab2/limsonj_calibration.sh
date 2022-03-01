@@ -14,8 +14,9 @@ for i in {0..6} ; do
     # copy the log ratio output data to a new file
     cp ./log_ratio_$i.dat ./log_ratio_input.dat 
     # run clustering program with ith dataset
-    ./cluster_op_exe $data_points suppressed_genes_$i.txt stationary_genes_$i.txt expressed_genes_$i.txt
+    ./cluster_op_exe $data_points suppressed_genes_$i.txt stationary_genes_$i.txt expressed_genes_$i.txt >> ./summary$i.txt
+    # create a summary file that lists the final cluster means and the total number of expressed, suppressed, and stationary 
+    wc -l < suppressed_genes_$i.txt >> ./summary$i.txt
+    wc -l < stationary_genes_$i.txt >> ./summary$i.txt
+    wc -l < expressed_genes_$i.txt >> ./summary$i.txt
 done
-
-# create a summary file that lists the final cluster means and the total number of expressed, suppressed, and stationary 
-# TODO
