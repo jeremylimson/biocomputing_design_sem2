@@ -6,6 +6,7 @@
 
 #include "limsonj_vector_ops_pre_processing.hpp"
 #include "limsonj_k_means.hpp"
+#include <fstream>
 
 int main(int argc, char * argv[]) {
     // sixth argument is the number of genes to be analyzed
@@ -13,6 +14,16 @@ int main(int argc, char * argv[]) {
 
     // initialzie variables and file pointers
     int x, y, z;
+    char output_buffer[100];
+
+    // file i/o for part 3
+    std::ofstream suppressed_file;
+    std::ofstream stationary_file;
+    std::ofstream expressed_file;
+
+    suppressed_file.open("suppressed_genes.txt");
+    stationary_file.open("stationary_genes.txt");
+    expressed_file.open("expressed_genes.txt");
 
     std::vector<int> red_vec_data;
     std::vector<int> red_vec_back;
@@ -24,6 +35,7 @@ int main(int argc, char * argv[]) {
     FILE* green_data;
     FILE* green_back;
     FILE* out_file;
+    FILE* normal_file;
 
     // fifth argument is the output file name
     char* file_name = argv[5];
@@ -134,9 +146,10 @@ int main(int argc, char * argv[]) {
     k_mean::cluster cluster2;
     k_mean::cluster cluster3;
 
-    cluster1.set_object_name("Expressed");
-    cluster2.set_object_name("Suppressed");
-    cluster3.set_object_name("Stationary");
+    // suppressed < 0, stationary = 0, expressed > 0
+    cluster1.set_object_name("Suppressed");
+    cluster2.set_object_name("Stationary");
+    cluster3.set_object_name("Expressed");
 
     // suppressed -> log ratio = -0.5, stationary -> log ratio = 0, expressed -> log ratio = .5
     cluster1.set_object_mean(-0.5);
@@ -145,7 +158,7 @@ int main(int argc, char * argv[]) {
 
     // (4) while this criteria is greater than 0.0001, repeat 1-4
     while (criteria > 0.0001) {
-        // clear every iteration
+        // remove all members
         cluster1.cluster_set.clear();
         cluster2.cluster_set.clear();
         cluster3.cluster_set.clear();
@@ -187,17 +200,47 @@ int main(int argc, char * argv[]) {
         // (4) criteria = |c1_mean_old – c1_mean| + |c2_mean_old – c2_mean|+|c3_mean_old –c3_mean|
         criteria = abs(old_mean1 - new_mean1) + abs(old_mean2 - new_mean2) + abs(old_mean3 - new_mean3);
     }
-    
+
+    std::cout << "\n\rmean 1: " << cluster1.get_object_mean() << "\n";
+    std::cout << "mean 2: " << cluster2.get_object_mean() << "\n";
+    std::cout << "mean 3: " << cluster3.get_object_mean() << "\n\n";
+
+    int count = 0;
+
+    // FIXME
+
     // output final cluster means to standard output
+    // write three output files, one for each of the final clusters
+    if (normal_file = fopen("./microarray/gene_list.txt", "r")) {
+        while (fgets(output_buffer, sizeof(output_buffer), normal_file) != NULL) {
+            float distance1 = cluster1.distance(normalized_data.at(count));
+            float distance2 = cluster2.distance(normalized_data.at(count));
+            float distance3 = cluster3.distance(normalized_data.at(count));
 
-    // write three output files, one for each of the final clusters: expressed_genes.txt, suppressed_genes.txt, stationary_genes.txt.  Each file should list the genes by name.
-
+            if (distance1 <= distance2 && distance1 < distance3) {
+                // print to suppressed_genes.txt file
+                suppressed_file << output_buffer;
+            } else if (distance2 < distance1 && distance2 < distance3) {
+                // print to stationary_genes.txt file
+                stationary_file << output_buffer;
+            } else if (distance3 < distance1 && distance3 < distance2) {
+                // print to expressed_genes.txt file
+                expressed_file << output_buffer;
+            }
+            count++;
+        }
+    }
+    
     // close files
     fclose(red_data);
     fclose(red_back);
     fclose(green_data);
     fclose(green_back);
     fclose(normal_data);
+
+    suppressed_file.close();
+    stationary_file.close();
+    expressed_file.close();
     
     return 0;
 }
