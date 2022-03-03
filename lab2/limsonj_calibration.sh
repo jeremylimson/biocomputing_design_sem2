@@ -16,7 +16,19 @@ for i in {0..6} ; do
     # run clustering program with ith dataset
     ./cluster_op_exe $data_points suppressed_genes_$i.txt stationary_genes_$i.txt expressed_genes_$i.txt >> ./summary$i.txt
     # create a summary file that lists the final cluster means and the total number of expressed, suppressed, and stationary 
+    echo >> ./summary$i.txt
+    echo "suppressed genes" >> ./summary$i.txt
     wc -l < suppressed_genes_$i.txt >> ./summary$i.txt
+
+    echo >> ./summary$i.txt
+    echo "stationary genes" >> ./summary$i.txt
     wc -l < stationary_genes_$i.txt >> ./summary$i.txt
+
+    echo >> ./summary$i.txt
+    echo "expressed genes" >> ./summary$i.txt
     wc -l < expressed_genes_$i.txt >> ./summary$i.txt
 done
+
+echo
+
+echo **Summary Files Generated**

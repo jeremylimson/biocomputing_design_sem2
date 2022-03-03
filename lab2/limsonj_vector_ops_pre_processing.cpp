@@ -29,14 +29,14 @@ int main(int argc, char * argv[]) {
 
     // read red sporulating cells file and background data
 	if (red_data = fopen(argv[1], "r")) {
-        std::cout << argv[1] <<" file exists\n";
+        //std::cout << argv[1] <<" file exists\n";
     } else {
         std::cout << "Swing and a miss... " << argv[1] << " does not exist. Try again\n\r";
         return -1;
     }
 
 	if (red_back = fopen(argv[2], "r")) {
-        std::cout << argv[2] <<" file exists\n";
+        //std::cout << argv[2] <<" file exists\n";
     } else {
         std::cout << "Swing and a miss... " << argv[2] << " does not exist. Try again\n\r";
         return -1;
@@ -44,13 +44,13 @@ int main(int argc, char * argv[]) {
     
     // read green sporulating cells file and background data
     if (green_data = fopen(argv[3], "r")) {
-        std::cout << argv[3] <<" file exists\n";
+        //std::cout << argv[3] <<" file exists\n";
     } else {
-        std::cout << "Swing and a miss... " << argv[3] << " does not exist. Try again\n\r";
+        //std::cout << "Swing and a miss... " << argv[3] << " does not exist. Try again\n\r";
         return -1;
     }
 	if (green_back = fopen(argv[4], "r")) {
-        std::cout << argv[4] <<" file exists\n";
+        //std::cout << argv[4] <<" file exists\n";
     } else {
         std::cout << "Swing and a miss... " << argv[4] << " does not exist. Try again\n\r";
         return -1;
