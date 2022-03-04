@@ -1,14 +1,14 @@
 
-mean 1: -0.296573
-mean 2: 0.0385927
-mean 3: 0.540208
+mean 1: -0.296211
+mean 2: 0.0372371
+mean 3: 0.535221
 
 
 suppressed genes
-1628
+1652
 
 stationary genes
-3700
+3773
 
 expressed genes
-672
+693

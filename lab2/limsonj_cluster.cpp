@@ -111,7 +111,6 @@ int main(int argc, char * argv[]) {
 
     int count = 0;
 
-    // FIXME
     // output final cluster means to standard output
     // write three output files, one for each of the final clusters
     if (normal_file = fopen("./microarray/gene_list.txt", "r")) {
