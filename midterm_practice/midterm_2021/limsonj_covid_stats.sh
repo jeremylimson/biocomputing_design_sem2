@@ -26,6 +26,9 @@ if [[ ! " ${headers[*]} " =~ " ${1} " ]]; then
     echo "The item you chose does not exist"
 fi
 
+# use grep or sed to
+# pipe cut into ifs to read line by line
+
 if [[ " ${headers[*]} " =~ " ${1} " ]]; then
     # whatever you want to do when array contains value
     for i in "${!headers[@]}"; do
