@@ -12,7 +12,11 @@ while read students; do
     for f in ./test_data/*.tar.gz; do 
         tar xf "$f"; 
     done
-done <./test_data/class_list.txt
+    # Copy each .c and .h file within the unpacked files into the out_directory
+    cp *.c *.h ./out_directory
 
-# Copy each .c and .h file within the unpacked files into the out_directory
-cp *.c *.h ./out_directory
+    # append the student’s last name to the start of the copied filename
+    mv ./out_directory/*.c ./out_directory/${students}_code.c
+    mv ./out_directory/*.h ./out_directory/${students}_code.h
+
+done <./test_data/class_list.txt
