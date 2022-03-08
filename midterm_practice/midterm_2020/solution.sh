@@ -10,7 +10,7 @@
     #echo error. wrong number of arguments
     #exit 1
 #fi
-
+# https://stackoverflow.com/questions/60481079/how-to-get-the-nth-numeric-field-in-a-string-using-grep
 #extract and display to the console
 file=$1
 prevline=0
