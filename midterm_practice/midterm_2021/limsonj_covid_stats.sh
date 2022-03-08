@@ -35,6 +35,7 @@ if [[ " ${headers[*]} " =~ " ${1} " ]]; then
     if [[ "${headers[$i]}" = "${1}" ]]; then
         let column=$i+1
         new_cases=( $( cut -d ',' -f$column owid-covid-data.csv ) )
+        echo "${new_cases[@]}" > test.txt
     fi
 done
 fi
@@ -42,7 +43,7 @@ fi
 country=( $( cut -d ',' -f3 owid-covid-data.csv ) )
 
 if [[ " ${country[*]} " =~ " ${2} " ]]; then
-
+    echo 
 fi
 
 # display to the screen the monthly average of the new covid cases per million for at least one country
